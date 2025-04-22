@@ -1,0 +1,21 @@
+[api]
+enabled = true
+
+[sources.my_source_id]
+type = "opentelemetry"
+
+[sources.my_source_id.grpc]
+address = "0.0.0.0:4317"
+
+[sources.my_source_id.http]
+address = "0.0.0.0:4318"
+headers = [ ]
+
+[sources.my_source_id.http.keepalive]
+max_connection_age_jitter_factor = 0.1
+max_connection_age_secs = 300
+
+[sinks.out]
+inputs = ["my_source_id.logs", "my_source_id.traces"]
+type = "console"
+encoding.codec = "json"

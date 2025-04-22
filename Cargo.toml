@@ -1,0 +1,14 @@
+[package]
+name = "vector-otel-repro"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+opentelemetry = { version = "0.29" }
+opentelemetry-otlp = { version="0.29",  features = ["grpc-tonic", "metrics", "tls"] }
+opentelemetry_sdk = { version = "*", features = ["rt-tokio"] }
+tracing = "0.1.41"
+tracing-opentelemetry = "0.30.0"
+tracing-subscriber = { version = "0.3.19", features = ["env-filter"] }
+tokio = { version = "1", features = ["full"] }
+opentelemetry-appender-tracing = "0.29.1"
