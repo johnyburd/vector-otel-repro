@@ -1,5 +1,5 @@
 use opentelemetry_appender_tracing::layer::OpenTelemetryTracingBridge;
-use opentelemetry_otlp::WithExportConfig as _;
+use opentelemetry_otlp::{Protocol, WithExportConfig as _};
 use tracing::{info};
 use tracing_subscriber::{layer::SubscriberExt as _, util::SubscriberInitExt as _};
 
@@ -7,7 +7,10 @@ use tracing_subscriber::{layer::SubscriberExt as _, util::SubscriberInitExt as _
 async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync + 'static>> {
     let otlp_logs_exporter = opentelemetry_otlp::LogExporter::builder()
         .with_http()
-        .with_endpoint("http://localhost:4318")
+        .with_protocol(Protocol::HttpBinary)
+    
+        //.with_protocol(Protocol::HttpJson)
+        .with_endpoint("http://localhost:4318/v1/logs")
         .build()?;
     let logs_provider = opentelemetry_sdk::logs::SdkLoggerProvider::builder()
         .with_batch_exporter(otlp_logs_exporter)

@@ -1,9 +1,13 @@
+
 ### Expected outcome
-Can use the opentelemetry and tracing crates to publish logs to vector
+ Can use the opentelemetry and tracing crates to publish logs to vector
 
 ### Actual outcome
-Vector returns a 500 with no error message
+ ~~Vector returns a 500 with no error message ~~
 
+### Resolution
+* make sure to include `/v1/logs` when posting logs
+* vector does not currently support the httpjson protocol https://github.com/vectordotdev/vector/pull/22875
 
 # Setup
 
